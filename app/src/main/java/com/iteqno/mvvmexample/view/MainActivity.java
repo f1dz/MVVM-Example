@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.iteqno.mvvmexample.R;
+import com.iteqno.mvvmexample.model.User;
 import com.iteqno.mvvmexample.viewmodel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText inputEmail, inputPassword;
     private Button btnLogin;
     private UserViewModel userViewModel;
+    private User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         inputEmail = findViewById(R.id.eEmail);
         inputPassword = findViewById(R.id.ePassword);
         btnLogin = findViewById(R.id.btnLogin);
+
+        userViewModel = new UserViewModel(this, user);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

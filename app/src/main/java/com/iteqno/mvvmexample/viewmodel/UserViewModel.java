@@ -1,12 +1,13 @@
 package com.iteqno.mvvmexample.viewmodel;
 
+import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.iteqno.mvvmexample.model.User;
 
-public class UserViewModel {
+public class UserViewModel extends ViewModel {
 
     public final static String TOAST_MESSAGE_SUCCESS = "Login Success";
     public final static String TOAST_MESSAGE_FAILED = "Login Failed";
@@ -34,9 +35,9 @@ public class UserViewModel {
             isValid = false;
 
         if (isValid)
-            showToast(TOAST_MESSAGE_FAILED);
-        else
             showToast(TOAST_MESSAGE_SUCCESS);
+        else
+            showToast(TOAST_MESSAGE_FAILED);
     }
 
     private void showToast(String message) {
