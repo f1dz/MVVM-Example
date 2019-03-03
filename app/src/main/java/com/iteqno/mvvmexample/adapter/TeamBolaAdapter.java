@@ -1,22 +1,21 @@
 package com.iteqno.mvvmexample.adapter;
 
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.iteqno.mvvmexample.R;
+import com.iteqno.mvvmexample.databinding.ItemRowBinding;
 import com.iteqno.mvvmexample.model.TeamDetail;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class TeamBolaAdapter extends RecyclerView.Adapter<TeamBolaAdapter.ViewHolder> {
 
     private List<TeamDetail> teams;
+    private LayoutInflater layoutInflater;
 
     public TeamBolaAdapter(List<TeamDetail> team) {
         this.teams = team;
@@ -25,15 +24,16 @@ public class TeamBolaAdapter extends RecyclerView.Adapter<TeamBolaAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_row, viewGroup, false);
+        if(layoutInflater == null)
+            layoutInflater = LayoutInflater.from(viewGroup.getContext());
 
-        return new ViewHolder(view);
+        ItemRowBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_row, viewGroup, false);
+        return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.teamName.setText(teams.get(i).teamName);
-        Picasso.get().load(teams.get(i).teamLogo).into(viewHolder.teamLogo);
+        viewHolder.binding.setTeamDetailVM(teams.get(i));
     }
 
     @Override
@@ -48,14 +48,11 @@ public class TeamBolaAdapter extends RecyclerView.Adapter<TeamBolaAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView teamName;
-        private ImageView teamLogo;
+        private final ItemRowBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            teamName = itemView.findViewById(R.id.teamName);
-            teamLogo = itemView.findViewById(R.id.teamLogo);
+        public ViewHolder(ItemRowBinding itemRowBinding) {
+            super(itemRowBinding.getRoot());
+            this.binding = itemRowBinding;
         }
     }
 }
