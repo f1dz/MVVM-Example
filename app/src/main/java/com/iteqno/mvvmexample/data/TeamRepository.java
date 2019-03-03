@@ -41,7 +41,7 @@ public class TeamRepository implements TeamDataSource {
 
             @Override
             public void onDataNotAvailable(String errorMassage) {
-                callback.onDataNotAvailable(errorMassage);
+                getTeamsFromRemote(callback);
             }
         });
     }

@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements TeamViewModel.Tea
 
     @Override
     public void loadListTeam(List<TeamDetail> listTeam) {
+        dataListTeamBola.clear();
         dataListTeamBola.addAll(listTeam);
         adapter.notifyDataSetChanged();
     }

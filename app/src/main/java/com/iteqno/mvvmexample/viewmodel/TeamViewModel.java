@@ -23,7 +23,7 @@ public class TeamViewModel {
     }
 
     public void getListTeam() {
-        teamRepository.getTeamsFromRemote(new TeamDataSource.GetTeamsCallback() {
+        teamRepository.getListTeams(new TeamDataSource.GetTeamsCallback() {
             @Override
             public void onTeamLoaded(Team data) {
                 teamNavigator.loadListTeam(data.getTeams());
